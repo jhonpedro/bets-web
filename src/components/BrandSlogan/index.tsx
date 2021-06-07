@@ -1,14 +1,17 @@
 import React from 'react'
-import { BrandSloganContainer } from './styles'
+import { BrandSloganLeftSide, RightSide, WrapperContainer } from './styles'
 
-const BrandSlogan = () => (
-  <BrandSloganContainer>
-    <strong>
-      <span>The</span> <span>Greatest</span> <span>App</span>
-    </strong>
-    <span>for</span>
-    <strong>LOTTERY</strong>
-  </BrandSloganContainer>
+const BrandSlogan: React.FC = ({ children }) => (
+  <WrapperContainer>
+    <BrandSloganLeftSide>
+      <strong>
+        <span>The</span> <span>Greatest</span> <span>App</span>
+      </strong>
+      <span>for</span>
+      <strong>LOTTERY</strong>
+    </BrandSloganLeftSide>
+    <RightSide>{children}</RightSide>
+  </WrapperContainer>
 )
 
 export default BrandSlogan
