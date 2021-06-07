@@ -5,6 +5,7 @@ import { LOGIN_FAILED, LOGIN_SUCCEED } from './actionTypes'
 const initialState = {
   username: '',
   email: '',
+  isLoggedIn: false,
   error: '',
 }
 
@@ -17,6 +18,7 @@ const authReducer = (state = initialState, action: Action) =>
       case LOGIN_SUCCEED: {
         draft.email = action.payload.email
         draft.username = action.payload.name
+        draft.isLoggedIn = true
         break
       }
       case LOGIN_FAILED: {
