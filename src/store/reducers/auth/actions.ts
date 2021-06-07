@@ -49,7 +49,7 @@ export const actionLoginRequest = ({
   dispatch,
   push,
 }: ActionLoginRequestProps): void => {
-  const { users } = store.getState()
+  const { users } = store.root.getState()
 
   const isUserRegistered = users.find(
     (user) => user.email === email && user.password === password
