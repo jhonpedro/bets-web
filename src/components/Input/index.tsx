@@ -62,20 +62,25 @@ const Input: React.FC<InputProps> = React.memo(
     }, [])
 
     return (
-      <InputContainer showErrorBorder={showError || false}>
-        <InputPlaceholder isUp={isUp} onClick={handleClickRedirectToInput}>
-          {placeholder}
-        </InputPlaceholder>
-        <InputElement
-          value={value}
-          type={!type ? 'text' : type}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          ref={inputRef}
-          {...rest}
-        />
+      <>
+        <InputContainer
+          showErrorBorder={showError || false}
+          className={`${showError ? 'invalid' : ''}`}
+        >
+          <InputPlaceholder isUp={isUp} onClick={handleClickRedirectToInput}>
+            {placeholder}
+          </InputPlaceholder>
+          <InputElement
+            value={value}
+            type={!type ? 'text' : type}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            ref={inputRef}
+            {...rest}
+          />
+        </InputContainer>
         {showError && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      </InputContainer>
+      </>
     )
   }
 )

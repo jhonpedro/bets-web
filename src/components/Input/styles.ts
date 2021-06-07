@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 interface InputPlaceholderProps {
   isUp: boolean
@@ -12,15 +12,16 @@ export const InputContainer = styled.div<InputContainerProps>`
   width: 100%;
   position: relative;
   padding: 1.5rem 0.5rem 0.5rem;
+`
 
-  ${(props) => {
-    if (props.showErrorBorder) {
-      return css`
-        border: 1px solid var(--color-red);
-      `
-    }
-    return css``
-  }}
+const fadeUp = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 `
 
 export const ErrorMessage = styled.span`
@@ -28,6 +29,8 @@ export const ErrorMessage = styled.span`
   font-weight: bold;
   text-align: center;
   color: var(--color-red);
+
+  animation: ${fadeUp} 300ms ease;
 `
 
 export const InputPlaceholder = styled.label<InputPlaceholderProps>`
@@ -54,7 +57,7 @@ export const InputElement = styled.input`
   font-family: inherit;
   font-size: 1.6rem;
   padding: 1rem 1.5rem;
-  border-radius: 1rem;
+  border-radius: var(--roundness-1);
   outline: none;
   border: none;
 `
