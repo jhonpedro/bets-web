@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import ButtonNoBorder from '../../ButtonNoBorder'
+import ButtonNoBorder from '../../ButtonRedirect/styles'
 import BoxInputsStyle from '../styles'
 
-export const BoxInputsContainer = styled(BoxInputsStyle)`
+export const LoginInputsBox = styled(BoxInputsStyle)`
   .forgot-password {
     display: flex;
     justify-content: flex-end;
@@ -18,7 +18,5 @@ export const BoxInputsContainer = styled(BoxInputsStyle)`
 
   ${ButtonNoBorder} {
     color: var(--color-green);
-    font-size: 4rem;
-    font-weight: bold;
   }
 `
