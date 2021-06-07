@@ -7,7 +7,7 @@ import { actionAddUser } from '../../../store/reducers/users/actions'
 import emailValidator from '../../../utils/emailValidator'
 import ButtonRedirect from '../../UI/ButtonRedirect'
 import Input from '../../UI/Input'
-import Modal from '../../Modal'
+import Modal from '../../Layout/Modal'
 import { BoxInputsContainer } from '../styles'
 import { SingInInputsBox } from './styles'
 
