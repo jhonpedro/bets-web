@@ -44,6 +44,10 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  .container {
+    padding: 0 12rem;
+  }
 `
 
 export const fadeIn = keyframes`
