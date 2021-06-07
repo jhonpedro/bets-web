@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import ButtonNoBorder from '../../ButtonRedirect/styles'
+import ButtonNoBorder from '../../UI/ButtonRedirect/styles'
 import BoxInputsStyle from '../styles'
 
 export const LoginInputsBox = styled(BoxInputsStyle)`

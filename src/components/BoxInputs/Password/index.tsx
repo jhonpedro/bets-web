@@ -1,7 +1,7 @@
 import React from 'react'
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
-import ButtonRedirect from '../../ButtonRedirect'
-import Input from '../../Input'
+import ButtonRedirect from '../../UI/ButtonRedirect'
+import Input from '../../UI/Input'
 import { BoxInputsContainer } from '../styles'
 import { ResetPasswordBox } from './styles'
 

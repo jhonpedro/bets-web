@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import ButtonRedirect from '../ButtonRedirect/styles'
-import { InputContainer } from '../Input/styles'
+import ButtonRedirect from '../UI/ButtonRedirect/styles'
+import { InputContainer } from '../UI/Input/styles'
 
 export const BoxInputsContainer = styled.div`
   display: flex;
