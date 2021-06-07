@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { fadeIn } from '../../../assets/global'
+import { fadeIn } from '../../../../assets/global'
 
 export const ModalBackdropContainer = styled.div`
   width: 100vw;

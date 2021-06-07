@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { fadeDown } from '../../../assets/global'
+import { fadeDown } from '../../../../assets/global'
 
 export const ModalBoxContainer = styled.div`
   padding: 2rem;
