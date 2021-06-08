@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { ButtonNoBorder } from '../../UI/Button'
 import { Actions, BrandHeading, HeaderContainer } from './styles'
 
-const Header = () => (
+const Header = React.memo(() => (
   <HeaderContainer className="container">
     <BrandHeading>TGL</BrandHeading>
     <Actions>
@@ -15,6 +15,6 @@ const Header = () => (
       </ButtonNoBorder>
     </Actions>
   </HeaderContainer>
-)
+))
 
 export default Header
