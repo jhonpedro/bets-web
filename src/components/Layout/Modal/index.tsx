@@ -7,11 +7,12 @@ import { ModalContainer } from './styles'
 interface ModalProps extends ModalBoxProps {
   showModal: boolean
   // eslint-disable-next-line no-unused-vars
-  disposedOnce: (wasDisposed: boolean) => void
+  disposedOnce?: (wasDisposed: boolean) => void
+  onDispose?: () => void
 }
 
 const Modal: React.FC<ModalProps> = React.memo(
-  ({ showModal: isShowing, title, message, disposedOnce }) => {
+  ({ showModal: isShowing, title, message, disposedOnce, onDispose }) => {
     const [showModal, setShowModal] = useState(isShowing)
 
     useEffect(() => {
@@ -22,7 +23,12 @@ const Modal: React.FC<ModalProps> = React.memo(
 
     const disposeModal = () => {
       setShowModal(false)
-      disposedOnce(true)
+      if (disposedOnce) {
+        disposedOnce(true)
+      }
+      if (onDispose) {
+        onDispose()
+      }
     }
 
     if (showModal) {
