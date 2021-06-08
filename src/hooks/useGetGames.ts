@@ -17,7 +17,7 @@ interface AxiosResponse {
 
 const useGetGames = (
   // eslint-disable-next-line no-unused-vars
-  setFirstGame: (firstGame: string) => void
+  setFirstGame: (game: GameI[]) => void
 ): [boolean, Array<GameI>] => {
   const [loading, setLoading] = useState(true)
   const [response, setResponse] = useState<Array<GameI>>([])
@@ -28,7 +28,7 @@ const useGetGames = (
       .then((res) => {
         setResponse(res.data.types)
         if (res.data.types) {
-          setFirstGame(res.data.types[0].type)
+          setFirstGame(res.data.types)
         }
       })
       .finally(() => {
