@@ -1,11 +1,12 @@
 import React from 'react'
-import { Switch } from 'react-router-dom'
+import { Redirect, Switch } from 'react-router-dom'
 
 import Route from './Route'
 import ForgotPassword from '../pages/ForgotPassword'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import SingUp from '../pages/SingUp'
+import NewBet from '../pages/NewBet'
 
 function Routes() {
   return (
@@ -21,6 +22,12 @@ function Routes() {
       </Route>
       <Route path="/forgot-password">
         <ForgotPassword />
+      </Route>
+      <Route path="/new-bet" isPrivate>
+        <NewBet />
+      </Route>
+      <Route path="*">
+        <Redirect to="/" />
       </Route>
     </Switch>
   )
