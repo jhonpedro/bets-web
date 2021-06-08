@@ -9,25 +9,22 @@ interface GameButtonProps {
   setCurrentGame: (gameType: string) => void
 }
 
-const GameButton: React.FC<GameButtonProps> = ({
-  title,
-  color,
-  isActive,
-  setCurrentGame,
-}) => {
-  const handleSetNewCurrentGame = () => {
-    setCurrentGame(title)
-  }
+const GameButton: React.FC<GameButtonProps> = React.memo(
+  ({ title, color, isActive, setCurrentGame }) => {
+    const handleSetNewCurrentGame = () => {
+      setCurrentGame(title)
+    }
 
-  return (
-    <GameButtonElement
-      color={color}
-      isActive={isActive}
-      onClick={handleSetNewCurrentGame}
-    >
-      {title}
-    </GameButtonElement>
-  )
-}
+    return (
+      <GameButtonElement
+        color={color}
+        isActive={isActive}
+        onClick={handleSetNewCurrentGame}
+      >
+        {title}
+      </GameButtonElement>
+    )
+  }
+)
 
 export default GameButton
