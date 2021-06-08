@@ -6,13 +6,13 @@ interface GameButtonListProps {
   games: Array<GameI>
   // eslint-disable-next-line no-unused-vars
   setCurrentGame: (gameType: string) => void
-  currentGameActual: string
+  currentGameType: string
 }
 
 const GameButtonList: React.FC<GameButtonListProps> = ({
   games,
   setCurrentGame,
-  currentGameActual,
+  currentGameType,
 }) => (
   <>
     {games.map((game) => (
@@ -20,7 +20,7 @@ const GameButtonList: React.FC<GameButtonListProps> = ({
         key={game.type}
         color={game.color}
         title={game.type}
-        isActive={game.type === currentGameActual}
+        isActive={game.type === currentGameType}
         setCurrentGame={setCurrentGame}
       />
     ))}
