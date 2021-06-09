@@ -7,6 +7,7 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 import SingUp from '../pages/SingUp'
 import NewBet from '../pages/NewBet'
+import Account from '../pages/Account'
 
 function Routes() {
   return (
@@ -25,6 +26,9 @@ function Routes() {
       </Route>
       <Route path="/new-bet" isPrivate>
         <NewBet />
+      </Route>
+      <Route path="/account" isPrivate>
+        <Account />
       </Route>
       <Route path="*">
         <Redirect to="/" />
