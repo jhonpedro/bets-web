@@ -4,6 +4,7 @@ export default createGlobalStyle`
   :root {
     font-size: 62.5%;
 
+    --color-water-green: #27C383;
     --color-green: #B5C401;
     --color-red: #D03434;
     --color-bg-light: #F7F7F7;
@@ -12,9 +13,11 @@ export default createGlobalStyle`
     --color-dark: #707070;
     --color-darker: #535351;
     --color-box-line-op: #00000014;
+    --color-box-line: #E2E2E2;
     --color-dark-op: #70707090;
     --color-box-line: #EBEBEB;
     --color-box-shadow: #DDDDDD;
+    --color-button-light: #F4F4F4;
 
     --roundness-1: 1rem;
     --roundness-2: 1.5rem;
