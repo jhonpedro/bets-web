@@ -19,4 +19,6 @@ export const NumberElement = styled.button<NumberElementProps>`
   height: 2rem;
   width: 2rem;
   margin: 1rem;
+
+  transition: 300ms ease;
 `
