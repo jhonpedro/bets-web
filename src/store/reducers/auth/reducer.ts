@@ -1,6 +1,6 @@
 import produce from 'immer'
 import { PossibleActions } from './actions'
-import { LOGIN_FAILED, LOGIN_SUCCEED } from './actionTypes'
+import { LOGIN_FAILED, LOGIN_SUCCEED, LOGOUT } from './actionTypes'
 
 const initialState = {
   username: '',
@@ -23,6 +23,13 @@ const authReducer = (state = initialState, action: Action) =>
       }
       case LOGIN_FAILED: {
         draft.error = action.payload.message
+        break
+      }
+      case LOGOUT: {
+        draft.username = ''
+        draft.email = ''
+        draft.isLoggedIn = false
+        draft.error = ''
         break
       }
       default:

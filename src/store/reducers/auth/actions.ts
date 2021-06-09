@@ -1,5 +1,5 @@
 import store from '../..'
-import { LOGIN_FAILED, LOGIN_SUCCEED } from './actionTypes'
+import { LOGIN_FAILED, LOGIN_SUCCEED, LOGOUT } from './actionTypes'
 
 interface ActionLoginRequestSucceed {
   type: typeof LOGIN_SUCCEED
@@ -63,6 +63,13 @@ export const actionLoginRequest = ({
   push('/')
 }
 
+interface ActionLogout {
+  type: typeof LOGOUT
+}
+
+export const actionLogout = (): ActionLogout => ({ type: LOGOUT })
+
 export type PossibleActions =
   | ActionLoginRequestSucceed
   | ActionLoginRequestFailed
+  | ActionLogout
