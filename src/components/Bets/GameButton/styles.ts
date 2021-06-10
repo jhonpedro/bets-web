@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
 interface GameButtonProps {
-  isActive: boolean
-  color: string
+  isActive?: boolean
+  color?: string
 }
 
 export const GameButtonElement = styled.button<GameButtonProps>`
