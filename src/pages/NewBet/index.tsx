@@ -26,6 +26,13 @@ const NewBet = () => {
     setCurrentGame((prevState) => ({ ...prevState, ...game[0], numbers: [] }))
   })
 
+  const getMinCartValue = useCallback(
+    () =>
+      games.reduce((acc, game) => acc + game['min-cart-value'], 0) /
+      games.length,
+    [games]
+  )
+
   const onGetCurrentBetGame = useCallback((): CartItem | undefined => {
     if (currentGame.numbers.length !== currentGame['max-number']) {
       setShowModal(
@@ -158,7 +165,7 @@ const NewBet = () => {
               />
             </div>
             <div className="cart">
-              <Cart />
+              <Cart showModal={setShowModal} minCartValue={getMinCartValue()} />
             </div>
           </NewBetContainer>
         </>
