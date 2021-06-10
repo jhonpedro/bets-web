@@ -6,9 +6,24 @@ export const ActionButtonsContainer = styled.div`
   display: flex;
 
   ${ButtonOutline}:nth-child(2) {
-    margin-left: 2rem;
+    margin: 0 2rem;
   }
   ${ButtonOutline}:last-child {
     margin-left: auto;
+  }
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+
+    ${ButtonOutline} {
+      margin: 1rem 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    ${ButtonOutline}:nth-child(2) {
+      margin: 0;
+    }
   }
 `
