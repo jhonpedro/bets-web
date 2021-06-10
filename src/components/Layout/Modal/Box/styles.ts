@@ -38,6 +38,13 @@ export const ModalBoxContainer = styled.div`
       color: white;
     }
   }
+
+  @media (max-width: 992px) {
+    width: 70%;
+  }
+  @media (max-width: 778px) {
+    width: 90%;
+  }
 `
 
 export const CloseButton = styled.button`
