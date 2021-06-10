@@ -4,6 +4,7 @@ export const RecentGameContainer = styled.div`
   color: var(--color-dark);
   position: relative;
   padding: 0.5rem 1rem;
+  margin: 1rem 0;
 
   strong:first-child {
     font-size: 2.1rem;
