@@ -10,7 +10,13 @@ import formatToReal from '../../../utils/formatToReal'
 import CartItem from '../CartItems'
 import { BetsContainer, CartBox } from './styles'
 
-const Cart: React.FC = React.memo(() => {
+interface CartProps {
+  minCartValue: number
+  // eslint-disable-next-line no-unused-vars
+  showModal: (title: string, message: string) => void
+}
+
+const Cart: React.FC<CartProps> = React.memo(({ showModal, minCartValue }) => {
   const { email } = useGetAuth()
   const cart = useGetCart()
   const dispatch = useDispatch()
@@ -21,6 +27,14 @@ const Cart: React.FC = React.memo(() => {
   }
 
   const handleSaveBets = () => {
+    if (cart.total < minCartValue) {
+      showModal(
+        'We need more bets',
+        `To save your game we need at least R$ ${minCartValue} in games`
+      )
+      return
+    }
+
     actionCreatorAddRecentGames(cart.items, email, dispatch)
     push('/')
   }
