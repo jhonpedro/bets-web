@@ -57,12 +57,12 @@ export default createGlobalStyle`
       padding: 0 4rem;
     }
   }
-  @media (max-height: 992px){
+  @media (max-height: 768px){
     :root {
-      font-size: 55%;
+      font-size: 50%;
     }
   }
-  @media (max-height: 768px){
+  @media (max-width: 576px){
     :root {
       font-size: 45%;
     }
