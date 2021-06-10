@@ -60,6 +60,13 @@ const BoxInputsBox = styled.form`
   ${InputContainer}.invalid:after {
     background-color: var(--color-red);
   }
+
+  @media (max-width: 768px) {
+    width: 60%;
+  }
+  @media (max-width: 576px) {
+    width: 90%;
+  }
 `
 
 export default BoxInputsBox
