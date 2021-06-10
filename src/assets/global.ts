@@ -51,6 +51,12 @@ export default createGlobalStyle`
   .container {
     padding: 0 12rem;
   }
+
+  @media (max-width: 768px){
+    .container {
+      padding: 0 4rem;
+    }
+  }
 `
 
 export const fadeIn = keyframes`
