@@ -9,6 +9,7 @@ import useGetGames, { GameI } from '../../hooks/useGetGames'
 import generateRandomArrayInRange from '../../utils/generateRandomArrayInRange'
 import { CartItem } from '../../store/reducers/cart/reducer'
 import { ChooseGameContainer, NewBetContainer, Strong } from './styles'
+import ScrollBarDiv from '../../components/UI/ScrollBarDiv/styles'
 
 export interface CurrentGame extends GameI {
   numbers: number[]
@@ -134,13 +135,13 @@ const NewBet = () => {
               </h3>
               <ChooseGameContainer>
                 <Strong>Choose Game</Strong>
-                <div>
+                <ScrollBarDiv>
                   <GameButtonList
                     games={games}
                     setCurrentGame={handleSetCurrentGame}
                     currentGameType={currentGame.type}
                   />
-                </div>
+                </ScrollBarDiv>
               </ChooseGameContainer>
               <Strong>Fill your bet</Strong>
               <p>{currentGame.description}</p>

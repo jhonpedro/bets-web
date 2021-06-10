@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { GameButtonElement } from '../../components/Bets/GameButton/styles'
+import ScrollBarDiv from '../../components/UI/ScrollBarDiv/styles'
 
 export const Strong = styled.strong`
   display: block;
@@ -45,34 +46,7 @@ export const ChooseGameContainer = styled.div`
     margin: 3rem 0;
   }
 
-  > div {
-    width: 90%;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding-bottom: 1rem;
-
-    /* width */
-    ::-webkit-scrollbar {
-      height: 0.6rem;
-    }
-
-    /* Track */
-    ::-webkit-scrollbar-track {
-      background: var(--color-dark-lighter);
-      border-radius: 1rem;
-    }
-
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: var(--color-green);
-      border-radius: 1rem;
-    }
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--color-green);
-    }
-
+  > ${ScrollBarDiv} {
     ${GameButtonElement} + ${GameButtonElement} {
       margin-left: 1rem;
     }
