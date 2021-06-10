@@ -43,6 +43,8 @@ const NewBet = () => {
     }
 
     setShowModal('Bet added', 'Your bet was added to the cart!')
+    onClearCurrentBetGame()
+
     return {
       color: currentGame.color,
       numbers: currentGame.numbers,
