@@ -3,8 +3,15 @@ import styled from 'styled-components'
 export const WrapperContainer = styled.div`
   width: 100vw;
   height: 100vh;
+
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `
 
 export const BrandSloganLeftSide = styled.div`
@@ -39,6 +46,10 @@ export const BrandSloganLeftSide = styled.div`
   strong:last-child {
     font-size: 8rem;
   }
+
+  @media (max-width: 992px) {
+    margin-bottom: 2rem;
+  }
 `
 
 export const RightSide = styled.div`
@@ -46,4 +57,12 @@ export const RightSide = styled.div`
   justify-content: center;
   align-items: center;
   width: 50%;
+
+  @media (max-width: 992px) {
+    width: 70%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
