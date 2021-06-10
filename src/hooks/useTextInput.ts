@@ -1,11 +1,12 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 // eslint-disable-next-line no-unused-vars
 type Validator = (toValidate: string) => boolean
 
 type UseTextInputReturn = [
   string,
-  React.Dispatch<React.SetStateAction<string>>,
+  // eslint-disable-next-line no-unused-vars
+  (newValue: string) => void,
   boolean,
   boolean,
   () => {}
