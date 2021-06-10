@@ -57,6 +57,16 @@ export default createGlobalStyle`
       padding: 0 4rem;
     }
   }
+  @media (max-height: 992px){
+    :root {
+      font-size: 55%;
+    }
+  }
+  @media (max-height: 768px){
+    :root {
+      font-size: 45%;
+    }
+  }
 `
 
 export const fadeIn = keyframes`
