@@ -12,10 +12,12 @@ export interface CartItem {
 
 export interface CartState {
   items: CartItem[]
+  total: number
 }
 
 const initialState: CartState = {
   items: [],
+  total: 0,
 }
 
 type Action = CartActions
@@ -26,9 +28,11 @@ const cartReducer = (state = initialState, action: Action) =>
     switch (action.type) {
       case ADD_TO_CART: {
         draft.items.push(action.payload)
+        draft.total += action.payload.price
         break
       }
       case REMOVE_FROM_CART: {
+        draft.total -= draft.items[action.payload.index].price
         draft.items.splice(action.payload.index, 1)
         break
       }
@@ -39,6 +43,7 @@ const cartReducer = (state = initialState, action: Action) =>
       case REHYDRATE: {
         if (action.payload) {
           draft.items = [...action.payload.cart.items]
+          draft.total = draft.items.reduce((acc, item) => acc + item.price, 0)
         }
         break
       }
