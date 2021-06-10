@@ -38,6 +38,7 @@ const cartReducer = (state = initialState, action: Action) =>
       }
       case CLEAR_CART: {
         draft.items = []
+        draft.total = 0
         break
       }
       case REHYDRATE: {
