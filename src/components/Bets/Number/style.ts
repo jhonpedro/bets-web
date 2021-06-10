@@ -21,4 +21,8 @@ export const NumberElement = styled.button<NumberElementProps>`
   margin: 1rem;
 
   transition: 300ms ease;
+
+  @media (max-width: 992px) {
+    margin: 0.5rem;
+  }
 `
