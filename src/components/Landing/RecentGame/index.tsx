@@ -1,4 +1,5 @@
 import React from 'react'
+import formatToReal from '../../../utils/formatToReal'
 import { RecentGameContainer } from './styles'
 
 export interface RecentGamesProps {
@@ -15,8 +16,8 @@ const RecentGame: React.FC<RecentGamesProps> = ({
   color,
 }) => (
   <RecentGameContainer color={color}>
-    <strong>{numbers}</strong>
-    <span>{price}</span>
+    <strong>{numbers.join(', ')}</strong>
+    <span>R$ {formatToReal(price)}</span>
     <strong>{type}</strong>
   </RecentGameContainer>
 )
