@@ -6,6 +6,7 @@ import { actionRemoveFromCart } from '../../../store/reducers/cart/actions'
 import { actionCreatorAddRecentGames } from '../../../store/reducers/users/actions'
 import useGetAuth from '../../../store/selectors/auth/useGetAuth'
 import useGetCart from '../../../store/selectors/cart/usetGetCart'
+import formatToReal from '../../../utils/formatToReal'
 import CartItem from '../CartItems'
 import { BetsContainer, CartBox } from './styles'
 
@@ -47,7 +48,7 @@ const Cart: React.FC = React.memo(() => {
           ))}
         </BetsContainer>
         <strong>
-          CART <span>TOTAL: R$ 0,00</span>
+          CART <span>TOTAL: R$ {formatToReal(cart.total)}</span>
         </strong>
       </div>
 

@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
 import { FiTrash2 } from 'react-icons/fi'
+import formatToReal from '../../../utils/formatToReal'
 import { BetInfo, CartItemsContainer } from './styles'
 
 interface CartItemProps {
@@ -24,7 +25,7 @@ const CartItem: React.FC<CartItemProps> = React.memo(
         <BetInfo color={color}>
           <span>{numbers.join(', ')}</span>
           <strong>
-            {type} <span>R$ {price}</span>
+            {type} <span>R$ {formatToReal(price)}</span>
           </strong>
         </BetInfo>
       </CartItemsContainer>
