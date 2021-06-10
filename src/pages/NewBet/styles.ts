@@ -39,6 +39,16 @@ export const NewBetContainer = styled.div`
   .cart {
     width: 29%;
   }
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .bet,
+    .cart {
+      width: 100%;
+    }
+  }
 `
 
 export const ChooseGameContainer = styled.div`
