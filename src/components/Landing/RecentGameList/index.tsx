@@ -9,7 +9,7 @@ const RecentGameList: React.FC<RecentGameListProps> = ({ items }) => (
   <>
     {items.map((item) => (
       <RecentGame
-        key={`${item.type}_${item.numbers.join()}`}
+        key={`${item.type}_${item.numbers.join()}_${Math.random()}`}
         numbers={item.numbers}
         price={item.price}
         type={item.type}
