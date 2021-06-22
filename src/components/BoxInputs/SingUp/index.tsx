@@ -1,23 +1,23 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
-import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import get from 'lodash/get'
+
 import useTextInput from '../../../hooks/useTextInput'
-import { actionAddUser } from '../../../store/reducers/users/actions'
 import emailValidator from '../../../utils/emailValidator'
 import ButtonRedirect from '../../UI/ButtonRedirect'
 import Input from '../../UI/Input'
 import Modal from '../../Layout/Modal'
 import { BoxInputsContainer } from '../styles'
 import { SingInInputsBox } from './styles'
+import axios from '../../../services/axios'
 
 const SingIn = () => {
-  const dispatch = useDispatch()
   const { push } = useHistory()
   const [modal, setModal] = useState({
     show: false,
-    title: 'Success',
-    message: `Sing up success, now you can enter with your account!`,
+    title: '',
+    message: '',
     disposedOnce: false,
     canRedirect: false,
   })
@@ -52,7 +52,7 @@ const SingIn = () => {
     passwordInputOnBlur,
   ] = useTextInput((toValidate) => toValidate.length >= 6)
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setAllOnblur()
 
@@ -60,19 +60,38 @@ const SingIn = () => {
       return
     }
 
-    dispatch(
-      actionAddUser({
+    try {
+      await axios.post('/users', {
         email: emailInput,
         name: nameInput,
         password: passwordInput,
+        password_confirmation: passwordInput,
       })
-    )
 
-    setModal((prevState) => ({ ...prevState, show: true, canRedirect: true }))
+      setModal((prevState) => ({
+        ...prevState,
+        title: 'Success',
+        message: 'Sing up success, now you can enter with your account!',
+        show: true,
+        canRedirect: true,
+      }))
+    } catch (error) {
+      setModal((prevState) => ({
+        ...prevState,
+        title: 'Sing up failed',
+        message: get(error, 'response.data[0].message', 'Try again later'),
+        show: true,
+        canRedirect: false,
+      }))
+    }
   }
 
-  const handleDisposedOnce = (wasDisposed: boolean) => {
-    setModal((prevState) => ({ ...prevState, disposedOnce: wasDisposed }))
+  const handleDisposed = () => {
+    setModal((prevState) => ({
+      ...prevState,
+      show: false,
+      disposedOnce: prevState.title === 'Success',
+    }))
   }
 
   const setAllOnblur = useCallback(() => {
@@ -106,7 +125,7 @@ const SingIn = () => {
         showModal={modal.show}
         title={modal.title}
         message={modal.message}
-        disposedOnce={handleDisposedOnce}
+        onDispose={handleDisposed}
       />
       <BoxInputsContainer>
         <strong>Registration</strong>
