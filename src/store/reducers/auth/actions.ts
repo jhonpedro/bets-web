@@ -1,5 +1,13 @@
-import store from '../..'
-import { LOGIN_FAILED, LOGIN_SUCCEED, LOGOUT } from './actionTypes'
+import { Dispatch } from 'react'
+import get from 'lodash/get'
+import axios from '../../../services/axios'
+import { CLEAR_ERROR, LOGIN_FAILED, LOGIN_SUCCEED, LOGOUT } from './actionTypes'
+
+interface ActionClearError {
+  type: typeof CLEAR_ERROR
+}
+
+const actionClearError = (): ActionClearError => ({ type: CLEAR_ERROR })
 
 interface ActionLoginRequestSucceed {
   type: typeof LOGIN_SUCCEED
@@ -37,31 +45,40 @@ const actionLoginFailed = (message: string): ActionLoginRequestFailed => ({
 interface ActionLoginRequestProps {
   email: string
   password: string
-  // eslint-disable-next-line no-unused-vars
-  dispatch: (action: PossibleActions) => void
-  // eslint-disable-next-line no-unused-vars
-  push(path: string): void
+  callback: () => void
 }
 
-export const actionLoginRequest = ({
-  email,
-  password,
-  dispatch,
-  push,
-}: ActionLoginRequestProps): void => {
-  const { users } = store.root.getState()
+export const actionLoginRequest =
+  ({ email, password, callback }: ActionLoginRequestProps) =>
+  async (dispatch: Dispatch<any>) => {
+    try {
+      const session = await axios.post('/session', { email, password })
 
-  const isUserRegistered = users.find(
-    (user) => user.email === email && user.password === password
-  )
+      // eslint-disable-next-line dot-notation
+      axios.defaults.headers.common['Authorization'] = `${
+        session.data.type === 'bearer' ? 'Bearer' : session.data.type
+      } ${session.data.token}`
 
-  if (!isUserRegistered) {
-    dispatch(actionLoginFailed(`You're not registered yet!`))
+      const user = await axios.get('/users')
+
+      dispatch(actionLoginSucceed(user.data.email, user.data.name))
+
+      callback()
+    } catch (error) {
+      const message = get(error, 'response.data[0].message', 'Try again later')
+      dispatch(
+        actionLoginFailed(
+          `${
+            message !== 'Try again later' ? 'You should sing up first' : message
+          }`
+        )
+      )
+      await new Promise((resolve) => {
+        setTimeout(resolve, 6000)
+      })
+      dispatch(actionClearError())
+    }
   }
-
-  dispatch(actionLoginSucceed(email, isUserRegistered!.name))
-  push('/')
-}
 
 interface ActionLogout {
   type: typeof LOGOUT
@@ -73,3 +90,4 @@ export type PossibleActions =
   | ActionLoginRequestSucceed
   | ActionLoginRequestFailed
   | ActionLogout
+  | ActionClearError
