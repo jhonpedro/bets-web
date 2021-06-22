@@ -14,17 +14,20 @@ interface ActionLoginRequestSucceed {
   payload: {
     email: string
     name: string
+    token: string
   }
 }
 
 const actionLoginSucceed = (
   email: string,
-  name: string
+  name: string,
+  token: string
 ): ActionLoginRequestSucceed => ({
   type: LOGIN_SUCCEED,
   payload: {
     email,
     name,
+    token,
   },
 })
 
@@ -61,7 +64,9 @@ export const actionLoginRequest =
 
       const user = await axios.get('/users')
 
-      dispatch(actionLoginSucceed(user.data.email, user.data.name))
+      dispatch(
+        actionLoginSucceed(user.data.email, user.data.name, session.data.token)
+      )
 
       callback()
     } catch (error) {
