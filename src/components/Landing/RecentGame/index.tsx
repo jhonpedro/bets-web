@@ -3,6 +3,7 @@ import formatToReal from '../../../utils/formatToReal'
 import { RecentGameContainer } from './styles'
 
 export interface RecentGamesProps {
+  id?: number
   numbers: number[]
   price: number
   type: string
