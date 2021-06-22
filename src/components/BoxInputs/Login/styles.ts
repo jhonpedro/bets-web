@@ -20,3 +20,12 @@ export const LoginInputsBox = styled(BoxInputsStyle)`
     color: var(--color-green);
   }
 `
+
+export const LoginErrorMessage = styled.strong`
+  display: block;
+
+  font-size: 1.6rem;
+  color: var(--color-red);
+  text-align: center;
+  margin-bottom: 1rem;
+`

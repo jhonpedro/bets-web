@@ -5,17 +5,17 @@ import { Link, useHistory } from 'react-router-dom'
 import ButtonRedirect from '../../UI/ButtonRedirect'
 import ButtonRedirectElement from '../../UI/ButtonRedirect/styles'
 import Input from '../../UI/Input'
-import { LoginInputsBox } from './styles'
+import { LoginInputsBox, LoginErrorMessage } from './styles'
 import { BoxInputsContainer } from '../styles'
 import useTextInput from '../../../hooks/useTextInput'
 import emailValidator from '../../../utils/emailValidator'
-// import useGetAuth from '../../../store/selectors/auth/useGetAuth'
 import { actionLoginRequest } from '../../../store/reducers/auth/actions'
+import useGetAuth from '../../../store/selectors/auth/useGetAuth'
 
 const Login: React.FC = () => {
+  const { error: loginError } = useGetAuth()
   const dispatch = useDispatch()
   const { push } = useHistory()
-  // const auth = useGetAuth()
 
   const [
     emailInput,
@@ -45,12 +45,15 @@ const Login: React.FC = () => {
       return
     }
 
-    actionLoginRequest({
-      email: emailInput,
-      password: passwordInput,
-      dispatch,
-      push,
-    })
+    dispatch(
+      actionLoginRequest({
+        email: emailInput,
+        password: passwordInput,
+        callback: () => {
+          push('/')
+        },
+      })
+    )
   }
 
   const handleChangeEmail = useCallback(
@@ -71,6 +74,7 @@ const Login: React.FC = () => {
     <BoxInputsContainer>
       <strong>Authentication</strong>
       <LoginInputsBox onSubmit={handleSubmit}>
+        {loginError && <LoginErrorMessage>{loginError}</LoginErrorMessage>}
         <Input
           placeholder="E-mail"
           type="email"
