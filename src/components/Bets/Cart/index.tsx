@@ -2,9 +2,9 @@ import React from 'react'
 import { FiArrowRight, FiShoppingCart } from 'react-icons/fi'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+
+import axios from '../../../services/axios'
 import { actionRemoveFromCart } from '../../../store/reducers/cart/actions'
-import { actionCreatorAddRecentGames } from '../../../store/reducers/users/actions'
-import useGetAuth from '../../../store/selectors/auth/useGetAuth'
 import useGetCart from '../../../store/selectors/cart/usetGetCart'
 import formatToReal from '../../../utils/formatToReal'
 import CartItem from '../CartItems'
@@ -17,7 +17,6 @@ interface CartProps {
 }
 
 const Cart: React.FC<CartProps> = React.memo(({ showModal, minCartValue }) => {
-  const { email } = useGetAuth()
   const cart = useGetCart()
   const dispatch = useDispatch()
   const { push } = useHistory()
@@ -26,17 +25,27 @@ const Cart: React.FC<CartProps> = React.memo(({ showModal, minCartValue }) => {
     dispatch(actionRemoveFromCart(cartItemIndex))
   }
 
-  const handleSaveBets = () => {
+  const handleSaveBets = async () => {
     if (cart.total < minCartValue) {
       showModal(
         'We need more bets',
-        `To save your game we need at least R$ ${minCartValue} in games`
+        `To save your game we need at least R$ ${formatToReal(
+          minCartValue
+        )} in games`
       )
       return
     }
 
-    actionCreatorAddRecentGames(cart.items, email, dispatch)
-    push('/')
+    try {
+      await axios.post('purchases', { bets: [...cart.items] })
+
+      push('/')
+    } catch (error) {
+      showModal(
+        'Failed',
+        'There were something wrong in your bet, try to do this bet again later'
+      )
+    }
   }
 
   return (
