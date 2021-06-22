@@ -1,15 +1,20 @@
 import produce from 'immer'
+import get from 'lodash/get'
+import { REHYDRATE } from 'redux-persist/es/constants'
+import { RootState } from '../..'
+import axios from '../../../services/axios'
 import { PossibleActions } from './actions'
 import { CLEAR_ERROR, LOGIN_FAILED, LOGIN_SUCCEED, LOGOUT } from './actionTypes'
 
 const initialState = {
-  username: '',
+  name: '',
   email: '',
+  token: '',
   isLoggedIn: false,
   error: '',
 }
 
-type Action = PossibleActions
+type Action = PossibleActions | { type: typeof REHYDRATE; payload: RootState }
 
 /* eslint-disable no-param-reassign */
 const authReducer = (state = initialState, action: Action) =>
@@ -17,7 +22,8 @@ const authReducer = (state = initialState, action: Action) =>
     switch (action.type) {
       case LOGIN_SUCCEED: {
         draft.email = action.payload.email
-        draft.username = action.payload.name
+        draft.name = action.payload.name
+        draft.token = action.payload.token
         draft.isLoggedIn = true
         break
       }
@@ -26,7 +32,7 @@ const authReducer = (state = initialState, action: Action) =>
         break
       }
       case LOGOUT: {
-        draft.username = ''
+        draft.name = ''
         draft.email = ''
         draft.isLoggedIn = false
         draft.error = ''
@@ -34,6 +40,13 @@ const authReducer = (state = initialState, action: Action) =>
       }
       case CLEAR_ERROR: {
         draft.error = ''
+        break
+      }
+      case REHYDRATE: {
+        axios.defaults.headers.common[
+          // eslint-disable-next-line dot-notation
+          'Authorization'
+        ] = `Bearer ${get(action, 'payload.auth.token')}`
         break
       }
       default:
