@@ -9,7 +9,7 @@ export const BoxInputsContainer = styled.div`
   align-items: center;
   flex-direction: column;
 
-  strong {
+  > strong {
     font-size: 3.5rem;
     color: var(--color-dark);
     text-align: center;
