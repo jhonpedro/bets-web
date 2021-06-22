@@ -1,9 +1,11 @@
 import styled from 'styled-components'
-import ButtonNoBorder from '../../UI/ButtonRedirect/styles'
+import ButtonNoBorderStyled from '../../UI/ButtonRedirect/styles'
 import BoxInputsBox from '../styles'
 
 export const ResetPasswordBox = styled(BoxInputsBox)`
-  ${ButtonNoBorder} {
+  ${ButtonNoBorderStyled} {
     color: var(--color-green);
   }
 `
+
+export const SubmitButton = styled(ButtonNoBorderStyled)``
