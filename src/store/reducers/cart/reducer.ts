@@ -4,6 +4,8 @@ import { CartActions } from './actions'
 import { ADD_TO_CART, CLEAR_CART, REMOVE_FROM_CART } from './actionTypes'
 
 export interface CartItem {
+  // eslint-disable-next-line camelcase
+  game_id: number
   numbers: number[]
   type: string
   price: number
