@@ -23,18 +23,17 @@ const NewBet = () => {
   })
   const [currentGame, setCurrentGame] = useState<CurrentGame>({} as CurrentGame)
   const [loading, games] = useGetGames((game) => {
-    setCurrentGame((prevState) => ({ ...prevState, ...game[0], numbers: [] }))
+    setCurrentGame((prevState) => ({ ...prevState, ...game, numbers: [] }))
   })
 
   const getMinCartValue = useCallback(
     () =>
-      games.reduce((acc, game) => acc + game['min-cart-value'], 0) /
-      games.length,
+      games.reduce((acc, game) => acc + game.min_cart_value, 0) / games.length,
     [games]
   )
 
   const onGetCurrentBetGame = useCallback((): CartItem | undefined => {
-    if (currentGame.numbers.length !== currentGame['max-number']) {
+    if (currentGame.numbers.length !== currentGame.max_number) {
       setShowModal(
         'More numbers',
         `You haven't select all numbers required to add this game to the cart`
@@ -46,6 +45,7 @@ const NewBet = () => {
     onClearCurrentBetGame()
 
     return {
+      game_id: currentGame.id,
       color: currentGame.color,
       numbers: currentGame.numbers,
       price: currentGame.price,
@@ -63,7 +63,8 @@ const NewBet = () => {
       ...prevState,
       numbers: generateRandomArrayInRange(
         [1, prevState.range],
-        prevState['max-number']
+        prevState.max_number - prevState.numbers.length,
+        prevState.numbers
       ),
     }))
   }, [])
@@ -90,8 +91,7 @@ const NewBet = () => {
         ...newGameInfo,
         actual: gameType,
         numbers: prevState.numbers.filter(
-          (n, index) =>
-            n <= prevState.range && index < newGameInfo['max-number']
+          (n, index) => n <= prevState.range && index < newGameInfo.max_number
         ),
       }))
     },
@@ -110,7 +110,7 @@ const NewBet = () => {
         return
       }
 
-      if (currentGame.numbers.length === currentGame['max-number']) {
+      if (currentGame.numbers.length === currentGame.max_number) {
         setShowModal(
           'Max numbers per this bet achieved!',
           'Try add this to cart and bet another game.'
