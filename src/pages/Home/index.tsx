@@ -52,15 +52,18 @@ const Home = () => {
     }
   }, [recentGames])
 
-  const handleChangeCurrentFilter = useCallback((newCurrentFilter: string) => {
-    setFilterGames((prevState) => ({
-      ...prevState,
-      filtered: recentGames.filter(
-        (recentGame) => recentGame.type === newCurrentFilter
-      ),
-      current: newCurrentFilter,
-    }))
-  }, [])
+  const handleChangeCurrentFilter = useCallback(
+    (newCurrentFilter: string) => {
+      setFilterGames((prevState) => ({
+        ...prevState,
+        filtered: recentGames.filter(
+          (recentGame) => recentGame.type === newCurrentFilter
+        ),
+        current: newCurrentFilter,
+      }))
+    },
+    [recentGames]
+  )
 
   const handleClearFilters = useCallback(() => {
     setFilterGames((prevState) => ({
@@ -68,7 +71,7 @@ const Home = () => {
       filtered: recentGames,
       current: '',
     }))
-  }, [])
+  }, [recentGames])
 
   return (
     <>
