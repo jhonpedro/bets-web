@@ -2,33 +2,32 @@ import { useEffect, useState } from 'react'
 import axios from '../services/axios'
 
 export interface GameI {
+  id: number
   type: string
   description: string
   range: number
   price: number
-  'max-number': number
+  // eslint-disable-next-line camelcase
+  max_number: number
   color: string
-  'min-cart-value': number
-}
-
-interface AxiosResponse {
-  types: GameI[]
+  // eslint-disable-next-line camelcase
+  min_cart_value: number
 }
 
 const useGetGames = (
   // eslint-disable-next-line no-unused-vars
-  setFirstGame: (game: GameI[]) => void
+  setFirstGame: (game: GameI) => void
 ): [boolean, Array<GameI>] => {
   const [loading, setLoading] = useState(true)
   const [response, setResponse] = useState<Array<GameI>>([])
 
   useEffect(() => {
     axios
-      .get<AxiosResponse>('/games.json')
+      .get<GameI[]>('/games')
       .then((res) => {
-        setResponse(res.data.types)
-        if (res.data.types) {
-          setFirstGame(res.data.types)
+        setResponse(res.data)
+        if (res.data) {
+          setFirstGame(res.data[0])
         }
       })
       .finally(() => {
