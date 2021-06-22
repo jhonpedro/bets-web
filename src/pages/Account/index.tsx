@@ -4,13 +4,13 @@ import useGetAuth from '../../store/selectors/auth/useGetAuth'
 import { AccountContainer } from './styles'
 
 const Account = () => {
-  const { username, email } = useGetAuth()
+  const { name, email } = useGetAuth()
 
   return (
     <>
       <Header />
       <AccountContainer className="container">
-        <strong>{username}</strong>
+        <strong>{name}</strong>
         <span>{email}</span>
       </AccountContainer>
     </>
