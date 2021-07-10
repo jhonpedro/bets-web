@@ -14,12 +14,7 @@ const NumbersList: React.FC<NumbersListProps> = React.memo(
     <>
       {new Array(range).fill(null).map((_, index) => {
         const number = index + 1
-        let isActive
-        if (actives) {
-          isActive = actives.includes(number)
-        } else {
-          isActive = false
-        }
+        const isActive = actives.includes(number)
         return (
           <Number
             color={color}
